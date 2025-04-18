@@ -10,6 +10,13 @@ class FarmerController extends Controller
 
     function showAddProductForm()
     {
+
+        if (session('user') == null) {
+            return redirect('/login')->with('error', 'Please login to continue');
+        }
+        if (session('user')->role != 'Seller') {
+            return redirect('/login')->with('error', 'You are not authorized to access this page');
+        }
         return view('seller.AddProductForm');
     }
     function handleAddProduct(Request $request)
