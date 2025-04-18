@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\UserDetail;
 
 class UserController extends Controller
 {
@@ -18,24 +19,28 @@ class UserController extends Controller
     }
     function handleSignup(Request $request)
     {
-        echo "Signup logic here";
-        echo $request->input('name');
-        echo $request->input('email');
-        echo $request->input('password');
-        echo $request->input('role');
+        // Handle signup logic here
+        $User = new UserDetail();
+        $User->name = $request->input('name');
+        $User->email = $request->input('email');
+        $User->password = bcrypt($request->input('password'));
+        $User->role = $request->input('role');
+        $User->save();
 
+        return redirect('/login')->with('success', 'User registered successfully');
 
-
-
-        // return redirect()->route('login');
     }
     function handleLogin(Request $request)
     {
         // Handle login logic here
-        echo "Login logic here";
-        echo $request->input('email');
-        echo $request->input('password');
-        // For example, validate the request and authenticate the user
-        // return redirect()->route('home');
+        $User = UserDetail::where('email', $request->input('email'))->first();
+        if ($User && password_verify($request->input('password'), $User->password)) {
+            // Authentication passed
+            session(['user' => $User]);
+           
+            return redirect('/add-product')->with('success', 'Login successful');
+        } else {
+            return redirect('/login')->with('error', 'Invalid credentials');
+        }
     }
 }
