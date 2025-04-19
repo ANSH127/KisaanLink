@@ -45,8 +45,15 @@
                         <div class="flex justify-between">
                             <a href="/productdetail/{{ $product->id }}"
                                 class="bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-600 transition duration-200">View</a>
-                            <a href="/buy/{{ $product->id }}"
-                                class="bg-green-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-green-600 transition duration-200">Buy</a>
+                            @if (
+                                session('user')->role != 'Seller' && $product->quantity > 0
+                                && $product->available_dates_from <= date('Y-m-d')
+                                && $product->available_dates_to >= date('Y-m-d')
+                            )
+                                            <a href="/buy/{{ $product->id }}"
+                                                class="bg-green-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-green-600 transition duration-200">Buy</a>
+
+                            @endif
                         </div>
                     </div>
                 </div>

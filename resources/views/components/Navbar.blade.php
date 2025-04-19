@@ -13,7 +13,7 @@
             @if (session('user'))
                 <div class="hidden md:flex space-x-6">
 
-                    @if (session('user')->role == 'seller')
+                    @if (session('user')->role == 'Seller')
 
 
                         <a href="/dashboard" class="hover:text-green-300 py-2">Dashboard</a>

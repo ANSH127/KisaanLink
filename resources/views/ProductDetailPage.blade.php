@@ -45,7 +45,7 @@
                 @endif
                 @if (
                     $product->quantity > 0
-                    && $product->available_dates_from >= date('Y-m-d')
+                    && $product->available_dates_from <= date('Y-m-d')
                     && $product->available_dates_to >= date('Y-m-d')
                 )
                                     <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded">Available</span>
@@ -55,10 +55,16 @@
             </div>
 
             <!-- Buy Button -->
-            <a href="/buy/{{ $product->id }}"
-                class="bg-green-500 text-white text-sm font-medium px-6 py-3 rounded hover:bg-green-600 transition duration-200 mt-4">
-                Buy Now
-            </a>
+            @if (session('user')->role != 'Seller' && $product->quantity > 0 
+                && $product->available_dates_from <= date('Y-m-d')
+                && $product->available_dates_to >= date('Y-m-d')
+            )
+
+                <a href="/buy/{{ $product->id }}"
+                    class="bg-green-500 text-white text-sm font-medium px-6 py-3 rounded hover:bg-green-600 transition duration-200 mt-4">
+                    Buy Now
+                </a>
+            @endif
             <!--  quantity left -->
             <p class="text-sm text-gray-600 mt-3">Quantity Left: <span
                     class="font-medium text-gray-800">{{ $product->quantity }} kg</span></p>
