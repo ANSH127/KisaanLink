@@ -1,3 +1,4 @@
+@include('components.navbar')
 <div>
     <h1>
         Dashboard

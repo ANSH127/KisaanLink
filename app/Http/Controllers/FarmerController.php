@@ -112,4 +112,22 @@ class FarmerController extends Controller
             return redirect('/products')->with('error', 'Product not found');
         }
     }
+
+
+    function showDashboard()
+    {
+        // fetch all the products with seller details
+        $products = ProductDetail::with('seller_id')->get();
+        echo "<pre>";
+        print_r($products);
+        echo "</pre>";
+
+
+
+
+
+
+
+        // return view('seller.Dashboard');
+    }
 }
