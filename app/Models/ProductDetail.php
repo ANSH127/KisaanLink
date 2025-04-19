@@ -21,4 +21,10 @@ class ProductDetail extends Model
         'additional_notes',
         'seller_id',
     ];
+
+    public function seller(){
+        return $this->belongsTo(UserDetail::class,'seller_id');
+    }
+
+    
 }

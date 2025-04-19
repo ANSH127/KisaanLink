@@ -116,18 +116,9 @@ class FarmerController extends Controller
 
     function showDashboard()
     {
-        // fetch all the products with seller details
-        $products = ProductDetail::with('seller_id')->get();
-        echo "<pre>";
-        print_r($products);
-        echo "</pre>";
+        // fetch all the products with seller details 
+        $products = ProductDetail::with('seller')->get();
 
-
-
-
-
-
-
-        // return view('seller.Dashboard');
+        return view('Dashboard', ['products' => $products]);
     }
 }

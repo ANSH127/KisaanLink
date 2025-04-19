@@ -6,7 +6,7 @@
         <div class="flex justify-between items-center h-16">
             <!-- Left: Website Name -->
             <div class="flex-shrink-0">
-                <a href="/" class="text-xl font-bold hover:text-green-300">FarmerPortal</a>
+                <a href="/dashboard" class="text-xl font-bold hover:text-green-300">FarmerPortal</a>
             </div>
 
             <!-- Right: Navigation Links -->
