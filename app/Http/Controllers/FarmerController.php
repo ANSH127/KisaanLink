@@ -114,11 +114,5 @@ class FarmerController extends Controller
     }
 
 
-    function showDashboard()
-    {
-        // fetch all the products with seller details 
-        $products = ProductDetail::with('seller')->get();
-
-        return view('Dashboard', ['products' => $products]);
-    }
+   
 }

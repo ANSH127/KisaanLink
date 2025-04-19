@@ -1,7 +1,6 @@
 @include('components.navbar')
 
 <div class="max-w-7xl mx-auto py-6">
-    <h1 class="text-2xl font-bold mb-4 text-center">Dashboard</h1>
 
     @if ($products->isEmpty())
         <p class="text-gray-600 text-center">No products available.</p>
@@ -44,7 +43,7 @@
 
                         <!-- Buttons -->
                         <div class="flex justify-between">
-                            <a href="/products/{{ $product->id }}"
+                            <a href="/productdetail/{{ $product->id }}"
                                 class="bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-600 transition duration-200">View</a>
                             <a href="/buy/{{ $product->id }}"
                                 class="bg-green-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-green-600 transition duration-200">Buy</a>

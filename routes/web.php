@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FarmerController;
+use App\Http\Controllers\BuyerController;
 
 
 Route::get('/signup', [UserController::class, 'showSignupPage'])->name('signup');
@@ -17,4 +18,5 @@ Route::get('/products', [FarmerController::class, 'showProductList'])->name('pro
 Route::delete('/products/{id}', [FarmerController::class, 'deleteProduct'])->name('deleteProduct');
 Route::get('/products/{id}/edit', [FarmerController::class, 'editProductForm'])->name('editProduct');
 Route::put('/products/{id}', [FarmerController::class, 'updateProduct'])->name('updateProduct');
-Route::get('/dashboard', [FarmerController::class,'showDashboard'])->name('dashboard');
+Route::get('/dashboard', [BuyerController::class,'showDashboard'])->name('dashboard');
+Route::get('/productdetail/{id}', [BuyerController::class,'showProductDetails'])->name('productDetails');
