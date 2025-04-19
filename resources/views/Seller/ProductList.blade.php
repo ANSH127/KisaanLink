@@ -1,3 +1,5 @@
+@include('components.navbar')
+
 <div class="min-h-screen bg-gray-100 py-8">
 
     <head>

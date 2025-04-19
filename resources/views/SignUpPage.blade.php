@@ -1,3 +1,5 @@
+@include('components.navbar')
+
 <div>
     <head>
         @vite('resources/css/app.css')

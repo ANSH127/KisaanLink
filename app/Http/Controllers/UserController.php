@@ -43,4 +43,11 @@ class UserController extends Controller
             return redirect('/login')->with('error', 'Invalid credentials');
         }
     }
+
+    function logout(Request $request)
+    {
+        // Handle logout logic here
+        session()->forget('user');
+        return redirect('/login')->with('success', 'Logged out successfully');
+    }
 }
