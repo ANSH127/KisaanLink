@@ -13,6 +13,8 @@ class UserDetail extends Model
         'email',
         'password',
         'role',
+        'phone',
+        'farm_location',
     ];
     protected $hidden = [
         'password',

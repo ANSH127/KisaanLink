@@ -25,6 +25,8 @@ class UserController extends Controller
         $User->email = $request->input('email');
         $User->password = bcrypt($request->input('password'));
         $User->role = $request->input('role');
+        $User->phone = $request->input('phone');
+        $User->farm_location = $request->input('address');
         $User->save();
 
         return redirect('/login')->with('success', 'User registered successfully');
@@ -38,7 +40,7 @@ class UserController extends Controller
             // Authentication passed
             session(['user' => $User]);
            
-            return redirect('/add-product')->with('success', 'Login successful');
+            return redirect('/dashboard')->with('success', 'Login successful');
         } else {
             return redirect('/login')->with('error', 'Invalid credentials');
         }

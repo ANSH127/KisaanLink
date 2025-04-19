@@ -12,15 +12,25 @@
             <!-- Right: Navigation Links -->
             @if (session('user'))
                 <div class="hidden md:flex space-x-6">
-                    <a href="/dashboard" class="hover:text-green-300 py-2">Dashboard</a>
-                    <a href="/products" class="hover:text-green-300 py-2">Products</a>
-                    <a href="/add-product" class="hover:text-green-300 py-2">Add Product</a>
+
+                    @if (session('user')->role == 'seller')
+
+
+                        <a href="/dashboard" class="hover:text-green-300 py-2">Dashboard</a>
+                        <a href="/products" class="hover:text-green-300 py-2">Products</a>
+                        <a href="/add-product" class="hover:text-green-300 py-2">Add Product</a>
+                        <a href="/orders" class="hover:text-green-300 py-2">Orders</a>
+
+                    @else
+                        <a href="/dashboard" class="hover:text-green-300 py-2">Dashboard</a>
+                        <a href="/orders" class="hover:text-green-300 py-2">Orders</a>
+                    @endif
 
 
                     <form method="POST" action="/logout" class="inline">
                         @csrf
                         <button type="submit" class="hover:text-red-300
-                                bg-blue-500  p-2 rounded-lg text-white font-semibold hover:bg-blue-600 cursor-pointer">
+                                    bg-blue-500  p-2 rounded-lg text-white font-semibold hover:bg-blue-600 cursor-pointer">
 
                             <span class="hidden md:inline">Logout</span>
                         </button>

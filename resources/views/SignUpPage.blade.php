@@ -14,11 +14,7 @@
                 <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center">Create an Account</h2> <!-- Larger heading -->
                 <form method="POST">
                     @csrf
-                    <div class="mb-6"> <!-- Increased margin for spacing -->
-                        <label for="name" class="block text-base font-medium text-gray-700">Name</label> <!-- Larger label -->
-                        <input type="text" name="name" id="name" required
-                            class="py-3 mt-2 block w-full  rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-base border-1 border-black"> <!-- Larger input -->
-                    </div>
+                    
 
                     <div class="mb-6">
                         <label for="role" class="block text-base font-medium text-gray-700">Role</label>
@@ -27,6 +23,11 @@
                             <option>Purchaser</option>
                             <option>Seller</option>
                         </select>
+                    </div>
+                    <div class="mb-6"> <!-- Increased margin for spacing -->
+                        <label for="name" class="block text-base font-medium text-gray-700">Name</label> <!-- Larger label -->
+                        <input type="text" name="name" id="name" required
+                            class="py-3 mt-2 block w-full  rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-base border-1 border-black"> <!-- Larger input -->
                     </div>
 
                     <div class="mb-6">
@@ -39,6 +40,18 @@
                         <input type="password" name="password" id="password" required
                             class="mt-2 py-3 block w-full  rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-base border-1 border-black">
                     </div>
+                    <div class="mb-6">
+                        <label for="phone"  class="block text-base font-medium text-gray-700">Phone</label>
+                        <input type="text" name="phone" id="phone" 
+                            class="mt-2 py-3 block w-full  rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-base border-1 border-black">
+                    </div>
+                    <div class="mb-6">
+                        <label for="address" class="block text-base font-medium text-gray-700">Address</label>
+                        <input type="text" name="address" id="address" 
+                            class="mt-2 py-3 block w-full  rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-base border-1 border-black">
+                    </div>
+
+
                     <div class="mt-6 mb-4 text-center">
                         <p class="text-sm text-gray-600">Already have an account? <a href="{{ route('login') }}"
                                 class="text-blue-600 hover:underline">Log in</a></p>
