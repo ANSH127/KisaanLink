@@ -12,3 +12,8 @@ Route::post('/login', [UserController::class, 'handleLogin'])->name('handleLogin
 
 Route::get('/add-product', [FarmerController::class, 'showAddProductForm'])->name('addProduct');
 Route::post('/add-product', [FarmerController::class, 'handleAddProduct'])->name('handleAddProduct');
+Route::get('/products', [FarmerController::class, 'showProductList'])->name('products');
+Route::delete('/products/{id}', [FarmerController::class, 'deleteProduct'])->name('deleteProduct');
+Route::get('/products/{id}/edit', [FarmerController::class, 'editProductForm'])->name('editProduct');
+Route::put('/products/{id}', [FarmerController::class, 'updateProduct'])->name('updateProduct');
+// Route::view('/dashboard', 'Dashboard')->name('dashboard');
