@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductDetail;
 use App\Models\Order;
+use App\Models\UserDetail;
 
 class OrderController extends Controller
 {
@@ -28,6 +29,17 @@ class OrderController extends Controller
         return view('Buyer.CheckoutPage', ['product' => $product]);
     }
 
+
+    function fetchdeliveryaddressbysellerid($seller_id){
+
+        $user=UserDetail::where('id',$seller_id)->first();
+        if($user){
+            return $user->farm_location;
+        }
+        return null;
+
+
+    }
     function handleCheckout(Request $request, $product_id)
     {
 
@@ -38,10 +50,16 @@ class OrderController extends Controller
         $order->product_id = $product_id;
         $order->buyer_id = session('user')->id;
         $order->seller_id = $request->input('seller_id');
+        $order->delivery_address= $this->fetchdeliveryaddressbysellerid($request->input('seller_id'));
+
         $order->save();
 
         return redirect('/dashboard')->with('success', 'Order placed successfully');
     }
+
+    
+
+    
     
    
 }

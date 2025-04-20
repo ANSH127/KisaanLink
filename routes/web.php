@@ -24,6 +24,8 @@ Route::put('/products/{id}', [FarmerController::class, 'updateProduct'])->name('
 Route::get('/dashboard', [BuyerController::class, 'showDashboard'])->name('dashboard');
 Route::get('/productdetail/{id}', [BuyerController::class, 'showProductDetails'])->name('productDetails');
 Route::get('/orders', [BuyerController::class, 'showOrders'])->name('orders');
+Route::get('/orders/{id}', [BuyerController::class, 'showOrderDetails'])->name('orderDetails');
+Route::post('/orders/{id}/cancel', [BuyerController::class, 'cancelOrder'])->name('cancelOrder');
 
 
 

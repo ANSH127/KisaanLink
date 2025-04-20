@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('counter_price')->nullable();
 
             $table->string('quantity');
-            $table->enum('status', ['Pending', 'Accepted', 'Rejected', 'Countered'])->default('Pending');
+            $table->enum('status', ['Pending', 'Accepted', 'Rejected', 'Countered','Cancelled'])->default('Pending');
             $table->foreignId('product_id')->constrained('products_details')->onDelete('cascade');
             $table->foreignId('buyer_id')->constrained('user_details')->onDelete('cascade');
             $table->foreignId('seller_id')->constrained('user_details')->onDelete('cascade');
@@ -24,8 +24,10 @@ return new class extends Migration {
             $table->string('delivery_address')->nullable();
             $table->string('delivery_date')->nullable();
             $table->string('delivery_status')->default('Pending');
+            $table->enum('cancelledby', ['Buyer', 'Seller'])->nullable();
+            $table->string('cancel_reason')->nullable();
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

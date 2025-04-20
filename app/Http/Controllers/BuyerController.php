@@ -41,4 +41,34 @@ class BuyerController extends Controller
 
         return view('Buyer.ViewOrdersPage', ['orders' => $orders]);
     }
+
+    function showOrderDetails($id)
+    {
+        // fetch the order details with product and seller details
+        $order = Order::with(['product', 'seller'])->where('id', $id)->first();
+
+        if (!$order) {
+            return redirect('/orders')->with('error', 'Order not found');
+        }
+
+        return view('Buyer.OrderDetailsPage', ['order' => $order]);
+    }
+
+    function cancelOrder(Request $request, $id)
+    {
+        // fetch the order details
+        $order = Order::where('id', $id)->first();
+
+        if (!$order) {
+            return redirect('/orders')->with('error', 'Order not found');
+        }
+
+        // update the order status and reason
+        $order->status = 'Cancelled';
+        $order->cancelledby = 'Buyer';
+        $order->save();
+
+        return redirect('/orders')->with('success', 'Order cancelled successfully');
+    }
+
 }
