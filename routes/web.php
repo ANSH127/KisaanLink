@@ -19,12 +19,16 @@ Route::get('/products', [FarmerController::class, 'showProductList'])->name('pro
 Route::delete('/products/{id}', [FarmerController::class, 'deleteProduct'])->name('deleteProduct');
 Route::get('/products/{id}/edit', [FarmerController::class, 'editProductForm'])->name('editProduct');
 Route::put('/products/{id}', [FarmerController::class, 'updateProduct'])->name('updateProduct');
-Route::get('/dashboard', [BuyerController::class,'showDashboard'])->name('dashboard');
-Route::get('/productdetail/{id}', [BuyerController::class,'showProductDetails'])->name('productDetails');
+
+
+Route::get('/dashboard', [BuyerController::class, 'showDashboard'])->name('dashboard');
+Route::get('/productdetail/{id}', [BuyerController::class, 'showProductDetails'])->name('productDetails');
+Route::get('/orders', [BuyerController::class, 'showOrders'])->name('orders');
+
+
 
 Route::get('/checkout/{product_id}', [OrderController::class, 'showCheckoutForm'])->name('checkout');
 Route::post('/checkout/{product_id}', [OrderController::class, 'handleCheckout'])->name('handleCheckout');
-Route::get('/orders', [BuyerController::class, 'showOrders'])->name('orders');
 
 
 
