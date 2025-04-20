@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FarmerController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\OrderController;
 
 
 Route::get('/signup', [UserController::class, 'showSignupPage'])->name('signup');
@@ -20,3 +21,8 @@ Route::get('/products/{id}/edit', [FarmerController::class, 'editProductForm'])-
 Route::put('/products/{id}', [FarmerController::class, 'updateProduct'])->name('updateProduct');
 Route::get('/dashboard', [BuyerController::class,'showDashboard'])->name('dashboard');
 Route::get('/productdetail/{id}', [BuyerController::class,'showProductDetails'])->name('productDetails');
+
+Route::get('/checkout/{product_id}', [OrderController::class, 'showCheckoutForm'])->name('checkout');
+Route::post('/checkout/{product_id}', [OrderController::class, 'handleCheckout'])->name('handleCheckout');
+
+

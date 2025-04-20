@@ -60,7 +60,7 @@
                 && $product->available_dates_to >= date('Y-m-d')
             )
 
-                <a href="/buy/{{ $product->id }}"
+                <a href="/checkout/{{ $product->id }}"
                     class="bg-green-500 text-white text-sm font-medium px-6 py-3 rounded hover:bg-green-600 transition duration-200 mt-4">
                     Buy Now
                 </a>
