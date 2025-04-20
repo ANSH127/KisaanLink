@@ -6,7 +6,7 @@ use App\Http\Controllers\FarmerController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\OrderController;
 
-
+Route::redirect('/', '/dashboard');
 Route::get('/signup', [UserController::class, 'showSignupPage'])->name('signup');
 Route::get('/login', [UserController::class, 'showLoginPage'])->name('login');
 Route::post('/signup', [UserController::class, 'handleSignup'])->name('handleSignup');
