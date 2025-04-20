@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductDetail;
+use App\Models\Order;
 
 class FarmerController extends Controller
 {
@@ -110,6 +111,80 @@ class FarmerController extends Controller
             return redirect('/products')->with('success', 'Product updated successfully');
         } else {
             return redirect('/products')->with('error', 'Product not found');
+        }
+    }
+
+    function showOrders()
+    {
+        if (session('user') == null) {
+            return redirect('/login')->with('error', 'Please login to continue');
+        }
+        if (session('user')->role != 'Seller') {
+            return redirect('/login')->with('error', 'You are not authorized to access this page');
+        }
+        // logic to show orders
+        $orders = Order::with('product', 'buyer')
+            ->where('seller_id', session('user')->id)
+            ->get();
+        
+        return view('Seller.ViewOrdersPage', ['orders' => $orders]);
+    }
+
+    function productquantityupdate($pid, $quantity)
+    {
+        $product = ProductDetail::find($pid);
+        if ($product) {
+            $product->quantity -= $quantity;
+            $product->save();
+        }
+
+
+
+    }
+
+    function acceptOrder($id)
+    {
+        if (session('user') == null) {
+            return redirect('/login')->with('error', 'Please login to continue');
+        }
+        if (session('user')->role != 'Seller') {
+            return redirect('/login')->with('error', 'You are not authorized to access this page');
+        }
+        $order = Order::find($id);
+        if (!$order) {
+            return redirect('/f/orders')->with('error', 'Order not found');
+        }
+        // Check if the order is already accepted or rejected
+        if ($order->status == 'Accepted' || $order->status == 'Rejected') {
+            return redirect('/f/orders')->with('error', 'Order already accepted or rejected');
+        }
+
+        if ($order) {
+
+            // update the quantity of the product
+            $this->productquantityupdate($order->product_id, $order->quantity);
+
+            $order->status = 'Accepted';
+            $order->save();
+            return redirect('/f/orders')->with('success', 'Order accepted successfully');
+        } 
+        
+    }
+    function rejectOrder($id)
+    {
+        if (session('user') == null) {
+            return redirect('/login')->with('error', 'Please login to continue');
+        }
+        if (session('user')->role != 'Seller') {
+            return redirect('/login')->with('error', 'You are not authorized to access this page');
+        }
+        $order = Order::find($id);
+        if ($order) {
+            $order->status = 'Rejected';
+            $order->save();
+            return redirect('/f/orders')->with('success', 'Order rejected successfully');
+        } else {
+            return redirect('/f/orders')->with('error', 'Order not found');
         }
     }
 

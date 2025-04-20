@@ -30,13 +30,15 @@ class OrderController extends Controller
     }
 
 
-    function fetchdeliveryaddressbysellerid($seller_id){
+    function fetchdeiliveryaddress($id){
 
-        $user=UserDetail::where('id',$seller_id)->first();
-        if($user){
-            return $user->farm_location;
+        // Fetch the delivery address of the user
+        $user = UserDetail::find($id);
+        if (!$user) {
+            return null; // or handle the case when user is not found
         }
-        return null;
+
+        return $user->address;
 
 
     }
@@ -50,7 +52,7 @@ class OrderController extends Controller
         $order->product_id = $product_id;
         $order->buyer_id = session('user')->id;
         $order->seller_id = $request->input('seller_id');
-        $order->delivery_address= $this->fetchdeliveryaddressbysellerid($request->input('seller_id'));
+        $order->delivery_address= $this->fetchdeiliveryaddress(session('user')->id);
 
         $order->save();
 

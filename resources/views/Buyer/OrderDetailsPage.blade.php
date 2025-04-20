@@ -61,7 +61,7 @@
             <!-- Delivery Address -->
             <div class="sm:col-span-2">
                 <p class="text-sm font-bold text-gray-500 uppercase tracking-wide">Delivery Address</p>
-                <p class="font-semibold text-xl text-gray-900">{{ $order->farm_location ?? "Not Available" }}</p>
+                <p class="font-semibold text-xl text-gray-900">{{ $order->delivery_address ?? "Not Available" }}</p>
             </div>
 
             <!-- Delivery Date -->

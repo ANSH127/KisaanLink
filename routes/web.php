@@ -21,11 +21,21 @@ Route::get('/products/{id}/edit', [FarmerController::class, 'editProductForm'])-
 Route::put('/products/{id}', [FarmerController::class, 'updateProduct'])->name('updateProduct');
 
 
+Route::get('/f/orders', [FarmerController::class, 'showOrders'])->name('orders');
+Route::post('/f/orders/{id}/accept', [FarmerController::class, 'acceptOrder'])->name('acceptOrder');
+Route::post('/f/orders/{id}/reject', [FarmerController::class, 'rejectOrder'])->name('rejectOrder');
+Route::post('/f/orders/{id}/counter', [FarmerController::class, 'counterOffer'])->name('counterOffer');
+
+
+
 Route::get('/dashboard', [BuyerController::class, 'showDashboard'])->name('dashboard');
 Route::get('/productdetail/{id}', [BuyerController::class, 'showProductDetails'])->name('productDetails');
 Route::get('/orders', [BuyerController::class, 'showOrders'])->name('orders');
 Route::get('/orders/{id}', [BuyerController::class, 'showOrderDetails'])->name('orderDetails');
 Route::post('/orders/{id}/cancel', [BuyerController::class, 'cancelOrder'])->name('cancelOrder');
+
+
+
 
 
 

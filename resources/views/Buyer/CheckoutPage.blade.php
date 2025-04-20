@@ -47,7 +47,7 @@
                 <!-- Offer Price -->
                 <div class="mb-4">
                     <label for="offer_price" class="block text-sm font-medium text-gray-700">Your Offer Price ($/kg)</label>
-                    <input type="number" id="offer_price" name="offer_price" step="0.01" required
+                    <input type="number" id="offer_price" name="offer_price" step="0.01" required  min="{{$product->price -( $product->price*0.05) }}"   max="{{ $product->price }}"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50">
                 </div>
 

@@ -55,7 +55,7 @@
             </div>
 
             <!-- Buy Button -->
-            @if (session('user')->role != 'Seller' && $product->quantity > 0 
+            @if ( session('user') &&  session('user')->role != 'Seller' && $product->quantity > 0 
                 && $product->available_dates_from <= date('Y-m-d')
                 && $product->available_dates_to >= date('Y-m-d')
             )

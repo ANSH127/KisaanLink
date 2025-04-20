@@ -26,7 +26,7 @@ class UserController extends Controller
         $User->password = bcrypt($request->input('password'));
         $User->role = $request->input('role');
         $User->phone = $request->input('phone');
-        $User->farm_location = $request->input('address');
+        $User->address = $request->input('address');
         $User->save();
 
         return redirect('/login')->with('success', 'User registered successfully');
