@@ -24,5 +24,7 @@ Route::get('/productdetail/{id}', [BuyerController::class,'showProductDetails'])
 
 Route::get('/checkout/{product_id}', [OrderController::class, 'showCheckoutForm'])->name('checkout');
 Route::post('/checkout/{product_id}', [OrderController::class, 'handleCheckout'])->name('handleCheckout');
+Route::get('/orders', [BuyerController::class, 'showOrders'])->name('orders');
+
 
 

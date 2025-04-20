@@ -42,4 +42,6 @@ class OrderController extends Controller
 
         return redirect('/dashboard')->with('success', 'Order placed successfully');
     }
+    
+   
 }
