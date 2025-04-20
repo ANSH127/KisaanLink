@@ -25,6 +25,7 @@
                         <th class="py-3 px-4 border-b text-left text-sm font-medium text-gray-700">Quality Grade</th>
                         <th class="py-3 px-4 border-b text-left text-sm font-medium text-gray-700">Available From</th>
                         <th class="py-3 px-4 border-b text-left text-sm font-medium text-gray-700">Available To</th>
+                        <th class="py-3 px-4 border-b text-left text-sm font-medium text-gray-700">Qty Left(in kg)</th>
                         <th class="py-3 px-4 border-b text-left text-sm font-medium text-gray-700">Additional Notes</th>
                         <th class="py-3 px-4 border-b text-left text-sm font-medium text-gray-700">Action</th>
                     </tr>
@@ -41,6 +42,7 @@
                             <td class="py-3 px-4 border-b text-sm text-gray-700">{{ $product->quality_grade }}</td>
                             <td class="py-3 px-4 border-b text-sm text-gray-700">{{ $product->available_dates_from }}</td>
                             <td class="py-3 px-4 border-b text-sm text-gray-700">{{ $product->available_dates_to }}</td>
+                            <td class="py-3 px-4 border-b text-sm text-gray-700">{{ $product->quantity }}</td>
                             <td class="py-3 px-4 border-b text-sm text-gray-700">
 
                                 <ul class="list-disc pl-5">

@@ -67,7 +67,9 @@
             <!-- Delivery Date -->
             <div class="sm:col-span-2">
                 <p class="text-sm font-bold text-gray-500 uppercase tracking-wide">Delivery Date</p>
-                <p class="font-semibold text-xl text-gray-900">{{ $order->delivery_date ?? 'Not Scheduled' }}</p>
+                <p class="font-semibold text-xl text-gray-900">
+                    {{ $order->delivery_date ? \Carbon\Carbon::parse($order->delivery_date)->format('d M Y, h:i A') : 'Not Scheduled' }}
+                </p>
             </div>
         </div>
     </div>
