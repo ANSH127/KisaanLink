@@ -21,7 +21,9 @@
         <p class="text-gray-600 text-center">No orders received yet.</p>
     @else
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full bg-white">
+        <div class="overflow-x-auto">
+
+            <table class="min-w-full bg-white ">
                 <thead class="bg-gray-100 border-b">
                     <tr>
                         <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Order Received</th>
@@ -32,6 +34,8 @@
                         <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Quantity</th>
                         <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Offering Price</th>
                         <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Actual Price</th>
+                        <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Payment Status</th>
+                        <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Payment ID</th>
                         <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Actions</th>
                     </tr>
                 </thead>
@@ -46,6 +50,22 @@
                             <td class="px-6 py-4 text-sm text-gray-800">{{ $order->quantity }} kg</td>
                             <td class="px-6 py-4 text-sm text-gray-800">${{ $order->offer_price }} / kg</td>
                             <td class="px-6 py-4 text-sm text-gray-800">${{ $order->product->price }} / kg</td>
+                            <td class="px-6 py-4 text-sm text-gray-800">
+                                <span class="px-2 py-1 rounded text-xs font-medium 
+                                            {{ $order->payment_status == 'Pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
+                                            {{ $order->payment_status == 'Completed' ? 'bg-green-100 text-green-800' : '' }}
+                                            {{ $order->payment_status == 'Failed' ? 'bg-red-100 text-red-800' : '' }}">
+                                    {{ $order->payment_status }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-800">
+                                @if($order->razorpay_payment_id)
+                                    {{ $order->razorpay_payment_id }}
+                                @else
+                                    <span class="text-gray-500">N/A</span>
+                                @endif
+                            </td>
+
                             <td class="px-6 py-4 text-sm">
                                 <div class="flex space-x-2">
                                     <!-- Accept Button -->
@@ -94,6 +114,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
         </div>
     @endif
 </div>
