@@ -43,7 +43,7 @@
                 <p class="font-semibold text-xl text-gray-900">${{ $order->quantity * $order->offer_price }}</p>
             </div>
 
-            <!-- Status -->
+            <!--Order Status -->
             <div>
                 <p class="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Order Status</p>
                 <span class="px-4 py-2 rounded-full text-sm font-semibold 
@@ -57,20 +57,45 @@
                     {{ $order->status }}
                 </span>
             </div>
+            <!--Payment Status -->
+            <div>
+                <p class="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Payment Status</p>
+                <span class="px-4 py-2 rounded-full text-sm font-semibold 
+                {{ $order->payment_status == 'Pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
+                    {{ $order->payment_status == 'Completed' ? 'bg-green-100 text-green-800' : '' }}
+                    {{ $order->payment_status == 'Failed' ? 'bg-red-100 text-red-800' : '' }}"
+                    ">
+                    {{ $order->payment_status }}
+                </span>
+            </div>
+            
+
+
+
 
             <!-- Delivery Address -->
-            <div class="sm:col-span-2">
+            <div >
                 <p class="text-sm font-bold text-gray-500 uppercase tracking-wide">Delivery Address</p>
                 <p class="font-semibold text-xl text-gray-900">{{ $order->delivery_address ?? "Not Available" }}</p>
             </div>
 
             <!-- Delivery Date -->
-            <div class="sm:col-span-2">
+            <div>
                 <p class="text-sm font-bold text-gray-500 uppercase tracking-wide">Delivery Date</p>
                 <p class="font-semibold text-xl text-gray-900">
                     {{ $order->delivery_date ? \Carbon\Carbon::parse($order->delivery_date)->format('d M Y, h:i A') : 'Not Scheduled' }}
                 </p>
             </div>
+
+            <!-- Payment id -->
+            <div>
+                <p class="text-sm font-bold text-gray-500 uppercase tracking-wide">Payment ID</p>
+                <p class="font-semibold text-xl text-gray-900">
+                    {{ $order->razorpay_payment_id ?? 'Not Available' }}
+                </p>
+            </div>
+
+
         </div>
     </div>
 </div>

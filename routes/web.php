@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FarmerController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RazorpayController;
 
 Route::redirect('/', '/dashboard');
 Route::get('/signup', [UserController::class, 'showSignupPage'])->name('signup');
@@ -41,6 +42,8 @@ Route::post('/orders/{id}/cancel', [BuyerController::class, 'cancelOrder'])->nam
 
 Route::get('/checkout/{product_id}', [OrderController::class, 'showCheckoutForm'])->name('checkout');
 Route::post('/checkout/{product_id}', [OrderController::class, 'handleCheckout'])->name('handleCheckout');
+
+Route::post('/razorpay-payment', [RazorpayController::class, 'store'])->name('razorpay.store');
 
 
 

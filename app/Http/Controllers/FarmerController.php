@@ -165,9 +165,9 @@ class FarmerController extends Controller
             $this->productquantityupdate($order->product_id, $order->quantity);
 
             $order->status = 'Accepted';
-            $order->delivery_date=now()->addDays(7);
-            $order->delivery_status = 'Processing';
-            $order->payment_method = 'Cash on Delivery';
+            // $order->delivery_date=now()->addDays(7);
+            // $order->delivery_status = 'Processing';
+            // $order->payment_method = 'Cash on Delivery';
             $order->save();
             return redirect('/f/orders')->with('success', 'Order accepted successfully');
         } 

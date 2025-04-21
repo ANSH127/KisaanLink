@@ -19,7 +19,9 @@ class Order extends Model
         'payment_method',
         'delivery_address',
         'delivery_date',
-        'delivery_status'
+        'delivery_status',
+        'payment_status',
+        'razorpay_payment_id'
     ];
     public function product()
     {
