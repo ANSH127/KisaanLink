@@ -95,7 +95,6 @@
                                 <!--  display pay now button iff the duration is less than or equal to 24 diffrence from the time of updated and now -->
 
                                 @if($order->updated_at->diffInHours(now()) <= 24)
-                                    <h1>hh</h1>
                                     <form action="/razorpay-payment" method="POST">
                                         @csrf
                                         <input type="hidden" name="order_id" value="{{ $order->id }}">
