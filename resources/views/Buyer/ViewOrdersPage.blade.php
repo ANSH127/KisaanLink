@@ -16,7 +16,8 @@
     <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative mt-4" role="alert">
         <strong class="font-bold">Warning!</strong>
         <span class="block sm:inline">
-            Please note that the payment for your order is only valid for 24 hours. If you do not complete the payment within this time frame, your order will be automatically cancelled.
+            Please note that the payment for your order is only valid for 24 hours. If you do not complete the payment
+            within this time frame, your order will be automatically cancelled.
         </span>
     </div>
 
@@ -50,20 +51,22 @@
                                 <span class="font-medium">${{ $order->offer_price }}</span>
                             </p>
                             <p class="text-sm text-gray-600 mb-1">Order Status:
-                                <span class="px-2 py-1 rounded text-xs font-medium 
-                                                    {{ $order->status == 'Pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                                                    {{ $order->status == 'Accepted' ? 'bg-green-100 text-green-800' : '' }}
-                                                    {{ $order->status == 'Rejected' ? 'bg-red-100 text-red-800' : '' }}
-                                                    {{ $order->status == 'Delivered' ? 'bg-blue-100 text-blue-800' : '' }}
-                                                    {{ $order->status == 'Cancelled' ? 'bg-red-100 text-red-800' : '' }}">
+                                <span
+                                    class="px-2 py-1 rounded text-xs font-medium 
+                                                                            {{ $order->status == 'Pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
+                                                                            {{ $order->status == 'Accepted' ? 'bg-green-100 text-green-800' : '' }}
+                                                                            {{ $order->status == 'Rejected' ? 'bg-red-100 text-red-800' : '' }}
+                                                                            {{ $order->status == 'Delivered' ? 'bg-blue-100 text-blue-800' : '' }}
+                                                                            {{ $order->status == 'Cancelled' ? 'bg-red-100 text-red-800' : '' }}">
                                     {{ $order->status }}
                                 </span>
                             </p>
                             <p class="text-sm text-gray-600 my-1">Payment Status:
-                                <span class="px-2 py-1 rounded text-xs font-medium 
-                                                    {{ $order->payment_status == 'Pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                                                    {{ $order->payment_status == 'Completed' ? 'bg-green-100 text-green-800' : '' }}
-                                                    {{ $order->payment_status == 'Failed' ? 'bg-red-100 text-red-800' : '' }}">
+                                <span
+                                    class="px-2 py-1 rounded text-xs font-medium 
+                                                                            {{ $order->payment_status == 'Pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
+                                                                            {{ $order->payment_status == 'Completed' ? 'bg-green-100 text-green-800' : '' }}
+                                                                            {{ $order->payment_status == 'Failed' ? 'bg-red-100 text-red-800' : '' }}">
                                     {{ $order->payment_status }}
                                 </span>
                             </p>
@@ -77,7 +80,7 @@
 
                         <!-- Action Buttons -->
                         <div class="mt-4 sm:mt-0 sm:ml-6 flex space-x-2">
-                           
+
                             @if ($order->status == 'Pending')
                                 <form action="/orders/{{ $order->id }}/cancel" method="POST">
                                     @csrf
@@ -90,26 +93,28 @@
                             @if($order->status == 'Accepted' && $order->payment_status == 'Pending')
 
                                 <!--  display pay now button iff the duration is less than or equal to 24 diffrence from the time of updated and now -->
-                                
+
                                 @if($order->updated_at->diffInHours(now()) <= 24)
-                                <form action="/razorpay-payment" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ env('RAZORPAY_KEY') }}"
-                                        data-amount="{{ $order->offer_price * $order->quantity * 100 }}" data-buttontext="Pay Now"
-                                        data-name="Farmers Market"
-                                        data-description="Order Payment" data-prefill.name="{{ $order->buyer->name }}"
-                                        data-prefill.email="{{ $order->buyer->email }}" data-theme.color="#ff7529">
-                                        </script>
+                                    <h1>hh</h1>
+                                    <form action="/razorpay-payment" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ env('RAZORPAY_KEY') }}"
+                                            data-amount="{{ $order->offer_price * $order->quantity * 100 }}" data-buttontext="Pay Now"
+                                            data-name="Farmers Market" data-description="Order Payment"
+                                            data-prefill.name="{{ $order->buyer->name }}"
+                                            data-prefill.email="{{ $order->buyer->email }}" data-theme.color="#ff7529">
+                                            </script>
 
 
 
-                                </form>
+                                    </form>
                                 @else
+                                
                                     <p class="text-sm text-red-500">Payment time expired.</p>
                                 @endif
 
-                                
+
                             @endif
                             <a href="/orders/{{ $order->id }}"
                                 class="bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-600 transition duration-200">
@@ -127,18 +132,28 @@
 
 <style>
     .razorpay-payment-button {
-        background-color: #38a169 !important; /* Green background */
-        color: white !important; /* White text */
-        font-size: 16px !important; /* Font size */
-        font-weight: 600 !important; /* Bold text */
-        padding: 8px 20px !important; /* Padding */
-        border-radius: 8px !important; /* Rounded corners */
-        border: none !important; /* Remove border */
-        cursor: pointer !important; /* Pointer cursor */
-        transition: background-color 0.3s ease !important; /* Smooth hover effect */
+        background-color: #38a169 !important;
+        /* Green background */
+        color: white !important;
+        /* White text */
+        font-size: 16px !important;
+        /* Font size */
+        font-weight: 600 !important;
+        /* Bold text */
+        padding: 8px 20px !important;
+        /* Padding */
+        border-radius: 8px !important;
+        /* Rounded corners */
+        border: none !important;
+        /* Remove border */
+        cursor: pointer !important;
+        /* Pointer cursor */
+        transition: background-color 0.3s ease !important;
+        /* Smooth hover effect */
     }
 
     .razorpay-payment-button:hover {
-        background-color: #2f855a !important; /* Darker green on hover */
+        background-color: #2f855a !important;
+        /* Darker green on hover */
     }
 </style>
