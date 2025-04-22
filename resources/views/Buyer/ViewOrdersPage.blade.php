@@ -13,6 +13,13 @@
 @endif
 <div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
     <h1 class="text-2xl font-bold text-center mb-8">Your Orders</h1>
+    <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative mt-4" role="alert">
+        <strong class="font-bold">Warning!</strong>
+        <span class="block sm:inline">
+            Please note that the payment for your order is only valid for 24 hours. If you do not complete the payment within this time frame, your order will be automatically cancelled.
+        </span>
+    </div>
+
 
     @if ($orders->isEmpty())
         <p class="text-center text-gray-600">You have no orders yet.</p>
@@ -81,6 +88,10 @@
                                 </form>
                             @endif
                             @if($order->status == 'Accepted' && $order->payment_status == 'Pending')
+
+                                <!--  display pay now button iff the duration is less than or equal to 24 diffrence from the time of updated and now -->
+                                
+                                @if($order->updated_at->diffInHours(now()) <= 24)
                                 <form action="/razorpay-payment" method="POST">
                                     @csrf
                                     <input type="hidden" name="order_id" value="{{ $order->id }}">
@@ -94,6 +105,11 @@
 
 
                                 </form>
+                                @else
+                                    <p class="text-sm text-red-500">Payment time expired.</p>
+                                @endif
+
+                                
                             @endif
                             <a href="/orders/{{ $order->id }}"
                                 class="bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-600 transition duration-200">
