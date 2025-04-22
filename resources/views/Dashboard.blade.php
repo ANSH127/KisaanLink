@@ -40,8 +40,14 @@
                                     class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded">{{ $product->quality_grade }}</span>
 
                             @endif
-                            @if($product->quantity > 0)
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded">Available</span>
+                            @if (
+                                $product->quantity > 0
+                                && $product->available_dates_from <= date('Y-m-d')
+                                && $product->available_dates_to >= date('Y-m-d')
+                            )
+                                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded">Available</span>
+                            @else
+                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-1 rounded">Out of Stock</span>
                             @endif
 
 
@@ -59,13 +65,17 @@
                             <a href="/productdetail/{{ $product->id }}"
                                 class="bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-600 transition duration-200">View</a>
                             @if (
-                                session('user') && 
+                                session('user') &&
                                 session('user')->role != 'Seller' && $product->quantity > 0
                                 && $product->available_dates_from <= date('Y-m-d')
                                 && $product->available_dates_to >= date('Y-m-d')
                             )
                                             <a href="/checkout/{{ $product->id }}"
                                                 class="bg-green-500 text-white text-sm font-medium px-4 py-2 rounded hover:bg-green-600 transition duration-200">Buy</a>
+
+                            @else
+                                <button class="bg-green-200 text-white text-sm font-bold px-4 py-2 rounded " disabled>Buy</button>
+
 
                             @endif
                         </div>

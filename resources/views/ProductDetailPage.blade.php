@@ -83,6 +83,9 @@
                         <p class="text-sm text-gray-600">
                             <span class="font-semibold text-gray-800">Email:</span> {{ $product->seller->email }}
                         </p>
+                        <p class="text-sm text-gray-600">
+                            <span class="font-semibold text-gray-800">Farm Location:</span> {{ $product->seller->address }}
+                            </p>    
                     </div>
                 </div>
             </div>

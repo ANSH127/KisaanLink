@@ -34,7 +34,9 @@ class BuyerController extends Controller
             return redirect('/dashboard')->with('error', 'You are not authorized to access this page');
         }
 
-        $orders = Order::with(['product', 'seller'])->where('buyer_id', session('user')->id)->get();
+        $orders = Order::with(['product', 'seller'])->where('buyer_id', session('user')->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
         if ($orders->isEmpty()) {
             return redirect('/dashboard')->with('error', 'No orders found');
         }
