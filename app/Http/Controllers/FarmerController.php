@@ -125,6 +125,7 @@ class FarmerController extends Controller
         // logic to show orders
         $orders = Order::with('product', 'buyer')
             ->where('seller_id', session('user')->id)
+            ->orderBy('created_at','desc')
             ->get();
         
         return view('Seller.ViewOrdersPage', ['orders' => $orders]);

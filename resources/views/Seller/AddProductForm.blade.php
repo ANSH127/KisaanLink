@@ -22,6 +22,11 @@
                         <option value="Tomatoes">Tomatoes</option>
                         <option value="Potatoes">Potatoes</option>
                         <option value="Wheat">Wheat</option>
+                        <option value="Rice">Rice</option>
+                        <option value="Mango">Mango</option>
+                        <option value="Onions">Onions</option>
+
+
                     </select>
                 </div>
 
