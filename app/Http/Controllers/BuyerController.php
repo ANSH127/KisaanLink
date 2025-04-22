@@ -73,4 +73,16 @@ class BuyerController extends Controller
         return redirect('/orders')->with('success', 'Order cancelled successfully');
     }
 
+    function searchProducts(Request $request)
+    {
+        $query = $request->input('query');
+
+        // fetch all the products with seller details that match the search query
+        $products = ProductDetail::with('seller')
+            ->where('product_name', 'LIKE', "%$query%")
+            ->get();
+
+        return view('Dashboard', ['products' => $products]);
+    }
+
 }

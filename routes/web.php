@@ -36,6 +36,7 @@ Route::get('/orders/{id}', [BuyerController::class, 'showOrderDetails'])->name('
 Route::post('/orders/{id}/cancel', [BuyerController::class, 'cancelOrder'])->name('cancelOrder');
 
 
+Route::get('/search', [BuyerController::class, 'searchProducts'])->name('searchProducts');
 
 
 

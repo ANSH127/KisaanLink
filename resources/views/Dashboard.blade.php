@@ -18,6 +18,19 @@
     @if ($products->isEmpty())
         <p class="text-gray-600 text-center">No products available.</p>
     @else
+
+        <!-- search box -->
+         <div>
+            <form action="/search" method="GET" class="flex items-center mb-4 gap-2">
+                <input type="text" name="query" placeholder="Search for products..."
+                    class="border border-gray-300 rounded-l px-4 py-2 w-full">
+                <button type="submit"
+                    class="bg-blue-500 text-white rounded-r px-4 py-2 hover:bg-blue-600 transition duration-200">Search</button>
+            </form>
+
+
+         </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @foreach ($products as $product)
                 <div class="bg-white shadow-md rounded-lg overflow-hidden">
