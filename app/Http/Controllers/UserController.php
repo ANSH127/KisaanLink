@@ -39,7 +39,7 @@ class UserController extends Controller
         if ($User && password_verify($request->input('password'), $User->password)) {
             // Authentication passed
             session(['user' => $User]);
-           
+
             return redirect('/dashboard')->with('success', 'Login successful');
         } else {
             return redirect('/login')->with('error', 'Invalid credentials');
@@ -51,5 +51,19 @@ class UserController extends Controller
         // Handle logout logic here
         session()->forget('user');
         return redirect('/login')->with('success', 'Logged out successfully');
+    }
+
+    function profile(Request $request)
+    {
+        // Fetch the logged-in user's details
+        $user = UserDetail::find(session('user')->id);
+
+        // Check if the user exists
+        if (!$user) {
+            return redirect('/login')->with('error', 'User not found. Please log in again.');
+        }
+
+        // Pass the user data to the Profile view
+        return view('Profile', ['user' => $user]);
     }
 }

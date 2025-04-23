@@ -20,10 +20,14 @@
                         <a href="/products" class="hover:text-green-300 py-2">Products</a>
                         <a href="/add-product" class="hover:text-green-300 py-2">Add Product</a>
                         <a href="/f/orders" class="hover:text-green-300 py-2">Orders</a>
+                        <a href="/profile" class="hover:text-green-300 py-2">Profile</a>
+
 
                     @else
                         <a href="/dashboard" class="hover:text-green-300 py-2">Dashboard</a>
                         <a href="/orders" class="hover:text-green-300 py-2">Orders</a>
+                        <a href="/profile" class="hover:text-green-300 py-2">Profile</a>
+
                     @endif
 
 

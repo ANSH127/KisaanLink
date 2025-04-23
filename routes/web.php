@@ -13,6 +13,7 @@ Route::get('/login', [UserController::class, 'showLoginPage'])->name('login');
 Route::post('/signup', [UserController::class, 'handleSignup'])->name('handleSignup');
 Route::post('/login', [UserController::class, 'handleLogin'])->name('handleLogin');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/profile',[UserController::class,'profile'])->name('profile');
 
 Route::get('/add-product', [FarmerController::class, 'showAddProductForm'])->name('addProduct');
 Route::post('/add-product', [FarmerController::class, 'handleAddProduct'])->name('handleAddProduct');
