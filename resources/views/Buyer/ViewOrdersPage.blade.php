@@ -37,6 +37,19 @@
 
                         <!-- Order Details -->
                         <div class="flex-1 sm:ml-6">
+
+                        <!-- show a warning if price is Counterd -->
+                        @if($order->status=='Countered')
+                            <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-1 rounded relative mt-1"
+                                role="alert">
+                                <strong class="font-bold">Counter Offer!</strong>
+                                <span class="block sm:inline">
+                                    The seller has made a counter offer for your order. Please check the details.
+                                </span>
+                            </div>
+                        @endif
+
+
                             <h5 class="text-lg font-bold text-gray-800 mb-2">Order ID: {{ $order->id }}</h5>
                             <p class="text-sm text-gray-600 mb-1">Product Name:
                                 <span class="font-medium">{{ $order->product->product_name }}</span>
@@ -57,7 +70,10 @@
                                                                             {{ $order->status == 'Accepted' ? 'bg-green-100 text-green-800' : '' }}
                                                                             {{ $order->status == 'Rejected' ? 'bg-red-100 text-red-800' : '' }}
                                                                             {{ $order->status == 'Delivered' ? 'bg-blue-100 text-blue-800' : '' }}
-                                                                            {{ $order->status == 'Cancelled' ? 'bg-red-100 text-red-800' : '' }}">
+                                                                            {{ $order->status == 'Cancelled' ? 'bg-red-100 text-red-800' : '' }}
+                                                                            {{ $order->status=='Countered'?'bg-orange-100 text-orange-800':'' }}
+                                                                            
+                                                                            ">
                                     {{ $order->status }}
                                 </span>
                             </p>
@@ -90,7 +106,7 @@
                                     </button>
                                 </form>
                             @endif
-                            @if($order->status == 'Accepted' && $order->payment_status == 'Pending')
+                            @if(($order->status == 'Accepted' || $order->status=='Countered') && $order->payment_status == 'Pending')
 
                                 <!--  display pay now button iff the duration is less than or equal to 24 diffrence from the time of updated and now -->
 
@@ -99,7 +115,11 @@
                                         @csrf
                                         <input type="hidden" name="order_id" value="{{ $order->id }}">
                                         <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ env('RAZORPAY_KEY') }}"
-                                            data-amount="{{ $order->offer_price * $order->quantity * 100 }}" data-buttontext="Pay Now"
+                                            data-amount="{{ 
+                                                $order->status == 'Countered' ? $order->counter_price * $order->quantity * 100 : 
+                                                $order->offer_price * $order->quantity * 100 
+                                            }}" data-currency="INR"
+                                            data-buttontext="Pay Now"
                                             data-name="Farmers Market" data-description="Order Payment"
                                             data-prefill.name="{{ $order->buyer->name }}"
                                             data-prefill.email="{{ $order->buyer->email }}" data-theme.color="#ff7529">

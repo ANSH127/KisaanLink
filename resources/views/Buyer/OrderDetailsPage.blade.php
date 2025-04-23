@@ -37,10 +37,25 @@
                 <p class="font-semibold text-xl text-gray-900">${{ $order->product->price }} / kg</p>
             </div>
 
+            <!-- Countered Price -->
+             @if($order->status == 'Countered')
+            <div>
+                <p class="text-sm font-bold text-gray-500 uppercase tracking-wide">Countered Price</p>
+                <p class="font-semibold text-xl text-gray-900">${{ $order->counter_price }} / kg</p>
+            </div>
+            @endif
+
             <!-- Total Price -->
             <div>
                 <p class="text-sm font-bold text-gray-500 uppercase tracking-wide">Total Price</p>
-                <p class="font-semibold text-xl text-gray-900">${{ $order->quantity * $order->offer_price }}</p>
+                <p class="font-semibold text-xl text-gray-900">
+                    @if($order->status == 'Countered')
+                        ${{ $order->counter_price * $order->quantity }}
+                    @else
+                    ${{ $order->quantity * $order->offer_price }}
+                    @endif
+
+                </p>
             </div>
 
             <!--Order Status -->
@@ -53,6 +68,7 @@
 
                     {{ $order->status == 'Delivered' ? 'bg-blue-100 text-blue-800' : '' }}
                     {{ $order->status == 'Cancelled' ? 'bg-red-100 text-red-800' : '' }}
+                    {{ $order->status == 'Countered' ? 'bg-orange-100 text-orange-800' : '' }}"
                     ">
                     {{ $order->status }}
                 </span>

@@ -30,7 +30,7 @@ class CancelUnpaidOrders extends Command
     public function handle()
     {
         //
-        $orders = Order::where('status', 'Accepted')
+        $orders = Order::whereIn('status', ['Countered', 'Accepted'])
             ->where('payment_status', 'Pending')
             ->where('updated_at', '<=', Carbon::now()->subHours(24))
             ->get();

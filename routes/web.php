@@ -25,7 +25,9 @@ Route::put('/products/{id}', [FarmerController::class, 'updateProduct'])->name('
 Route::get('/f/orders', [FarmerController::class, 'showOrders'])->name('orders');
 Route::post('/f/orders/{id}/accept', [FarmerController::class, 'acceptOrder'])->name('acceptOrder');
 Route::post('/f/orders/{id}/reject', [FarmerController::class, 'rejectOrder'])->name('rejectOrder');
-Route::post('/f/orders/{id}/counter', [FarmerController::class, 'counterOffer'])->name('counterOffer');
+
+Route::post('/f/orders/{id}/counter', [FarmerController::class, 'counterOffer'])->name('makecounterOffer');
+Route::get('/f/setcounter/{id}', [FarmerController::class, 'showcounterOfferForm'])->name('showcounterOfferForm');
 
 
 

@@ -77,13 +77,14 @@
                                                 Accept
                                             </button>
                                         </form>
-                                        <form action="/f/orders/{{ $order->id }}/counter" method="POST">
-                                            @csrf
+                                        <a href="/f/setcounter/{{ $order->id }}" class="inline-block">
+                                       
                                             <button type="submit"
                                                 class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200">
                                                 Counter
                                             </button>
-                                        </form>
+                                        </a>
+                                        
                                         <form action="/f/orders/{{ $order->id }}/reject" method="POST">
                                             @csrf
                                             <button type="submit"

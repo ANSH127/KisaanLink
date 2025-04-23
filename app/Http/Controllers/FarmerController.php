@@ -194,6 +194,42 @@ class FarmerController extends Controller
         }
     }
 
+    function showcounterOfferForm($id)
+    {
+        if (session('user') == null) {
+            return redirect('/login')->with('error', 'Please login to continue');
+        }
+        if (session('user')->role != 'Seller') {
+            return redirect('/login')->with('error', 'You are not authorized to access this page');
+        }
+        $order = Order::where('id', $id)->where('status', 'Pending')->first();
+        if (!$order) {
+            return redirect('/f/orders')->with('error', 'Order not found or already accepted/rejected');
+        }
+        return view('seller.CounterOfferForm', ['order' => $order]);
+        
+    }
+
+    function counterOffer(Request $request, $id)
+    {
+        if (session('user') == null) {
+            return redirect('/login')->with('error', 'Please login to continue');
+        }
+        if (session('user')->role != 'Seller') {
+            return redirect('/login')->with('error', 'You are not authorized to access this page');
+        }
+        $order = Order::find($id);
+        if ($order) {
+            $order->counter_price = $request->input('counter_offer_price');
+            $order->status = 'Countered';
+            $order->save();
+            return redirect('/f/orders')->with('success', 'Counter offer sent successfully');
+        } else {
+            return redirect('/f/orders')->with('error', 'Order not found');
+        }
+    }
+
+
 
    
 }
