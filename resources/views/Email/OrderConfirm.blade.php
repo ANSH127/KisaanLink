@@ -23,6 +23,7 @@
                 ${{ $order->counter_price * $order->quantity }}
                 @else
                 ${{ $order->offer_price * $order->quantity }}
+                @endif
             </td>
         </tr>
         <tr>
