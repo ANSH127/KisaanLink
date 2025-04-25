@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserDetail;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyEmail;
 
 class UserController extends Controller
 {
@@ -29,7 +31,11 @@ class UserController extends Controller
         $User->address = $request->input('address');
         $User->save();
 
-        return redirect('/login')->with('success', 'User registered successfully');
+        // encode the user id
+        $encoded_id = base64_encode($User->id);
+        Mail::to($User->email)->send(new VerifyEmail($encoded_id));
+
+        return redirect('/login')->with('success', 'User registered successfully. Please verify your email to log in.');
 
     }
     function handleLogin(Request $request)
@@ -37,6 +43,9 @@ class UserController extends Controller
         // Handle login logic here
         $User = UserDetail::where('email', $request->input('email'))->first();
         if ($User && password_verify($request->input('password'), $User->password)) {
+            if (!$User->email_verified) {
+                return redirect('/login')->with('error', 'Please verify your email before logging in.');
+            }
             // Authentication passed
             session(['user' => $User]);
 
@@ -65,5 +74,21 @@ class UserController extends Controller
 
         // Pass the user data to the Profile view
         return view('Profile', ['user' => $user]);
+    }
+
+    function verifyEmail($encodedId)
+    {
+        $userId = base64_decode($encodedId);
+
+        $user = UserDetail::find($userId);
+
+        if (!$user) {
+            return redirect('/login')->with('error', 'Invalid verification link.');
+        }
+
+        $user->email_verified = true;
+        $user->save();
+
+        return redirect('/login')->with('success', 'Email verified successfully. You can now log in.');
     }
 }

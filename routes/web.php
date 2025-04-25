@@ -14,6 +14,7 @@ Route::post('/signup', [UserController::class, 'handleSignup'])->name('handleSig
 Route::post('/login', [UserController::class, 'handleLogin'])->name('handleLogin');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/profile',[UserController::class,'profile'])->name('profile');
+Route::get('/verify-email/{encodedId}', [UserController::class, 'verifyEmail'])->name('verify-email');
 
 Route::get('/add-product', [FarmerController::class, 'showAddProductForm'])->name('addProduct');
 Route::post('/add-product', [FarmerController::class, 'handleAddProduct'])->name('handleAddProduct');
