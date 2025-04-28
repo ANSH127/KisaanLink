@@ -28,6 +28,7 @@
                     <tr>
                         <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Order Received</th>
                         <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Last Updated</th>
+                        <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Order Id</th>
                         <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Buyer Name</th>
                         <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Buyer Address</th>
                         <th class="text-left px-6 py-3 text-sm font-medium text-gray-600">Product Name</th>
@@ -44,6 +45,7 @@
                         <tr class="border-b hover:bg-gray-50">
                             <td class="px-6 py-4 text-sm text-gray-800">{{ $order->created_at->format('d M Y, h:i A') }}</td>
                             <td class="px-6 py-4 text-sm text-gray-800">{{ $order->updated_at->format('d M Y, h:i A') }}</td>
+                            <td class="px-6 py-4 text-sm text-gray-800">{{ $order->id }}</td>
                             <td class="px-6 py-4 text-sm text-gray-800">{{ $order->buyer->name }}</td>
                             <td class="px-6 py-4 text-sm text-gray-800">{{ $order->buyer->address }}</td>
                             <td class="px-6 py-4 text-sm text-gray-800">{{ $order->product->product_name }}</td>
