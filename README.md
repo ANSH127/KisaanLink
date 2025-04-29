@@ -2,6 +2,10 @@
 
 FarmerPortal is a Laravel-based web application designed to connect farmers with buyers, provide agricultural resources, and streamline the process of managing farm-related activities.
 
+## Developer Activity
+
+[![wakatime](https://wakatime.com/badge/github/ANSH127/KisaanLink.svg)](https://wakatime.com/badge/github/ANSH127/KisaanLink)
+
 ## Features
 
 - **Farmer Registration**: Farmers can create accounts and manage their profiles.
