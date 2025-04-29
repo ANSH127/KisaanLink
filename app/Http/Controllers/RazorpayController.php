@@ -50,7 +50,7 @@ class RazorpayController extends Controller
 
                 // send the   email
                 try {
-                    Mail::to("anshagrawal12348@gmail.com")->send(new OrderConfirmMail($order));
+                    Mail::to($order->buyer->email)->send(new OrderConfirmMail($order));
                 } catch (Exception $e) {
                     \Log::error('Failed to send order confirmation email: ' . $e->getMessage());
 
