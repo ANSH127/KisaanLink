@@ -220,6 +220,7 @@ class FarmerController extends Controller
         }
         $order = Order::find($id);
         if ($order) {
+            $this->productquantityupdate($order->product_id, $order->quantity);
             $order->counter_price = $request->input('counter_offer_price');
             $order->status = 'Countered';
             $order->save();
